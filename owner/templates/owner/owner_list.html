@@ -1,10 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <p>Bienvenido Pythonistas</p>
-</body>
-</html>
+{% extends "owner/base_generic.html" %}
+
+{% block content %}
+
+    <h1>Bienvenido!!!</h1>
+    {% comment %}{% if nombre and edad %}
+        <h2>El owner existe!!</h2>
+        <p>Nombre: {{ nombre  }}</p>
+        <p>Edad: {{ edad }}</p>
+        <p>DNI: {{ dni }}</p>
+        <p>Pais: {{ pais }}</p>
+
+        {% if edad > 18 %}
+            <p>Usted es mayor de edad</p>
+        {% else %}
+            <p>Usted no es mayor de edad</p>
+        {% endif %}
+
+        {% if dni %}
+            {%  if not vigente %}
+                <p>Su pase esta por vener</p>
+            {% endif %}
+        {% endif %}
+
+    {% else %}
+        <h2>Todavia no existe un owner registrado</h2>
+    {% endif %}
+
+
+    <h1>Ejercicio</h1>
+    {% if edad > 18 %}
+        <p>Nombre: {{ nombre.split.pop }} es mayor de edad</p>
+    {% else %}
+        <p>Nombre: {{ nombre }} es menor de edad</p>
+    {% endif %}
+
+    {% if vigente %}
+        <p>Su pase esta vigente</p>
+    {% else %}
+        <p>Su pase no esta vigente</p>
+    {% endif %}{% endcomment %}
+
+{#    {% for owner in data_context %}#}
+{#        <li>#}
+{#            <p><strong>Nombre de Owner: </strong>{{ owner.nombre }}</p>#}
+{#            <p><strong>Edad de Owner: </strong>{{ owner.edad }}</p>#}
+{#            <p><strong>Pais de Owner: </strong>{{ owner.pais }}</p>#}
+{#        </li>#}
+{#    {% endfor %}#}
+
+    <div>
+        {% for owner in data_context %}
+            {% if owner.edad and owner.dni %}
+                <p><strong>Nombre de Owner: </strong>{{ owner.nombre }}</p>
+                <p><strong>Edad de owner: {{ owner.edad }}</strong></p>
+                {% if owner.pokemons %}
+                    Y tiene los siguientes pokemones: <br>
+                    {% for pokemon in owner.pokemons %}
+                        {{ pokemon.nombre_pokemon }},
+                        tiene los siguientes ataques, que son: {{ pokemon.ataques | length }}
+                        {% for ataque in pokemon.ataques %}
+                            {{ ataque }}
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <button type="button" class="btn btn-primary">Primary</button>
+{% endblock %}
