@@ -1,5 +1,6 @@
 # Ignora todos los directorios .idea del proyecto que se agrega al usar pycharm
 .idea
+.__pycache__
 # Ignora la base de datos sqlite3 que viene por defecto al crear un proyecto con django
 
 *.sqlite3
