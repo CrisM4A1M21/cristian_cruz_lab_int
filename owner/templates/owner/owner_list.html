@@ -48,10 +48,13 @@
 {#        </li>#}
 {#    {% endfor %}#}
 
-    <div>
+    {% comment %}<div>
         {% for owner in data_context %}
             {% if owner.edad and owner.dni %}
-                <p><strong>Nombre de Owner: </strong>{{ owner.nombre }}</p>
+                <p><strong>Nombre de Owner: </strong>{{ owner.nombre | lower }}</p>
+                <p><strong>Uso de Pipe Slugify (filtos) {{ owner.nombre | slugify }}</strong></p>
+                <p><strong>Uso de Pipe Upper (filtos) {{ owner.nombre | upper }}</strong></p>
+                <p><strong>Uso de Pipe Cut (filtos) {{ owner.nombre | cut:" " }}</strong></p>
                 <p><strong>Edad de owner: {{ owner.edad }}</strong></p>
                 {% if owner.pokemons %}
                     Y tiene los siguientes pokemones: <br>
@@ -66,7 +69,18 @@
 
             {% endif %}
         {% endfor %}
+    </div>{% endcomment %}
+
+    <div>
+        {% for owner in data_context %}
+            {% if owner.edad != 0 %}
+            <p>El Owner <strong>{{ owner.nombre }}</strong> tiene <strong>{{ owner.edad }}</strong>
+            y viene de <strong>{{ owner.pais }}</strong></p>
+            {% endif %}
+        {% endfor %}
     </div>
+
+    {% comment %}<strong>{{ data_context.nombre }}</strong>{% endcomment %}
 
     <button type="button" class="btn btn-primary">Primary</button>
 {% endblock %}
