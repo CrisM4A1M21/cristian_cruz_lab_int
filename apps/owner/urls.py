@@ -15,5 +15,8 @@ urlpatterns = [
     path('owner_delete_vc/<int:pk>', views.OwnerDelete.as_view(), name='owner_delete_vc'),
     #URLs Serializers
     path('owner_list_serializer/', views.ListOwnerSerializer, name='owner_list_srr'),
+    #URL DRF
+    path('owner_list_drf_def/', views.owner_detail_view, name='owner_list_drf_def'),
+    path('owner_detail_drf_def/<int:pk>', views.owner_details_view, name='owner_detail_drf_def')
 ]
 
